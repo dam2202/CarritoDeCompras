@@ -1,10 +1,12 @@
 public class Carrito {
     private Producto[] productos;
     private int cantidadProductos;
+    private Descuento descuento;
 
-    public Carrito() {
+    public Carrito(Descuento descuento) {
         productos = new Producto[3];
         cantidadProductos = 0;
+        this.descuento = descuento;
     }
 
     public void agregarProducto(Producto producto) {
@@ -21,7 +23,6 @@ public class Carrito {
         for (int i = 0; i < cantidadProductos; i++) {
             total += productos[i].getPrecio();
         }
-        return total;
+        return descuento.aplicarDescuento(total);
     }
 }
-

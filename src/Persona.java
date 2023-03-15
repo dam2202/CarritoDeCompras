@@ -1,43 +1,36 @@
 import java.time.LocalDate;
 
 public class Persona {
+    private String nombre;
+    private String apellido;
+    private LocalDate fechaNacimiento;
 
-        private String nombre;
-        private String apellido;
-        private LocalDate fechaNacimiento;
+    public Persona(String nombre, String apellido, LocalDate fechaNacimiento) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
-        public Persona(String nombre, String apellido, LocalDate fechaNacimiento) {
-            this.nombre = nombre;
-            this.apellido = apellido;
-            this.fechaNacimiento = fechaNacimiento;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public int getEdad() {
+        LocalDate now = LocalDate.now();
+        int edad = now.getYear() - fechaNacimiento.getYear();
+        if (now.getMonthValue() < fechaNacimiento.getMonthValue() ||
+                (now.getMonthValue() == fechaNacimiento.getMonthValue() &&
+                        now.getDayOfMonth() < fechaNacimiento.getDayOfMonth())) {
+            edad--;
         }
-
-        // getters y setters
-
-
-        public String getNombre() {
-            return nombre;
-        }
-
-        public void setNombre(String nombre) {
-            this.nombre = nombre;
-        }
-
-        public String getApellido() {
-            return apellido;
-        }
-
-        public void setApellido(String apellido) {
-            this.apellido = apellido;
-        }
-
-        public LocalDate getFechaNacimiento() {
-            return fechaNacimiento;
-        }
-
-        public void setFechaNacimiento(LocalDate fechaNacimiento) {
-            this.fechaNacimiento = fechaNacimiento;
-        }
-
-
+        return edad;
+    }
 }
