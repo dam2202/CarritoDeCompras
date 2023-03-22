@@ -7,14 +7,19 @@ public class DescuentoPorcentajeConTope implements Descuento {
         this.tope = tope;
     }
 
-    @Override
-    public float aplicarDescuento(float precio) {
+    public float aplicarDescuento(float precio) throws DescuentoInvalidoException {
         float descuento = precio * (porcentaje / 100);
 
         if (descuento > tope) {
-            return precio - tope;
-        } else {
-            return precio - descuento;
+            descuento = tope;
         }
+
+        float precioConDescuento = precio - descuento;
+
+        if (precioConDescuento < 0) {
+            throw new DescuentoInvalidoException("El descuento no puede dar un monto negativo");
+        }
+
+        return precioConDescuento;
     }
 }

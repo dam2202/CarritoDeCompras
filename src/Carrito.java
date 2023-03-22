@@ -1,28 +1,29 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class Carrito {
-    private Producto[] productos;
-    private int cantidadProductos;
+    protected ArrayList<Producto> productos;
     private Descuento descuento;
 
     public Carrito(Descuento descuento) {
-        productos = new Producto[3];
-        cantidadProductos = 0;
+        this.productos = new ArrayList<>();
         this.descuento = descuento;
     }
 
     public void agregarProducto(Producto producto) {
-        if (cantidadProductos < 3) {
-            productos[cantidadProductos] = producto;
-            cantidadProductos++;
-        } else {
-            System.out.println("No se pueden agregar más productos al carrito");
-        }
+        productos.add(producto);
     }
 
     public float precio() {
-        float total = 0;
-        for (int i = 0; i < cantidadProductos; i++) {
-            total += productos[i].getPrecio();
+        float precioTotal = 0;
+        for (Producto producto : productos) {
+            precioTotal += producto.getPrecio();
         }
-        return descuento.aplicarDescuento(total);
+        try {
+            precioTotal = descuento.aplicarDescuento(precioTotal);
+        } catch (DescuentoInvalidoException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return precioTotal;
     }
 }

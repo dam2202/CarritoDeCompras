@@ -1,3 +1,3 @@
 public interface Descuento {
-    float aplicarDescuento(float precio);
+    float aplicarDescuento(float precio) throws DescuentoInvalidoException;
 }

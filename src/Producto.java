@@ -2,13 +2,11 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private float precio;
-    private String codigo;
 
-    public Producto(String nombre, String descripcion, float precio, String codigo) {
+    public Producto(String nombre, String descripcion, float precio) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -21,9 +19,5 @@ public class Producto {
 
     public float getPrecio() {
         return precio;
-    }
-
-    public String getCodigo() {
-        return codigo;
     }
 }

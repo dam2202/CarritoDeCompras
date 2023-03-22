@@ -5,8 +5,15 @@ public class DescuentoPorcentaje implements Descuento {
         this.porcentaje = porcentaje;
     }
 
-    @Override
-    public float aplicarDescuento(float precio) {
-        return precio * (1 - porcentaje / 100);
+    public float aplicarDescuento(float precio) throws DescuentoInvalidoException {
+        if (precio == 0) {
+            throw new DescuentoInvalidoException("No se puede aplicar un descuento a un carrito de precio 0");
+        }
+        float descuento = precio * porcentaje / 100;
+        float precioConDescuento = precio - descuento;
+        if (precioConDescuento < 0) {
+            throw new DescuentoInvalidoException("El descuento no puede dar un monto negativo");
+        }
+        return precioConDescuento;
     }
 }

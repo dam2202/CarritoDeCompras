@@ -1,6 +1,6 @@
 import java.time.LocalDate;
 
-public class Persona {
+class Persona {
     private String nombre;
     private String apellido;
     private LocalDate fechaNacimiento;
@@ -24,11 +24,12 @@ public class Persona {
     }
 
     public int getEdad() {
-        LocalDate now = LocalDate.now();
-        int edad = now.getYear() - fechaNacimiento.getYear();
-        if (now.getMonthValue() < fechaNacimiento.getMonthValue() ||
-                (now.getMonthValue() == fechaNacimiento.getMonthValue() &&
-                        now.getDayOfMonth() < fechaNacimiento.getDayOfMonth())) {
+        LocalDate fechaActual = LocalDate.now();
+        int edad = fechaActual.getYear() - fechaNacimiento.getYear();
+        if (fechaActual.getMonthValue() < fechaNacimiento.getMonthValue()) {
+            edad--;
+        } else if (fechaActual.getMonthValue() == fechaNacimiento.getMonthValue()
+                && fechaActual.getDayOfMonth() < fechaNacimiento.getDayOfMonth()) {
             edad--;
         }
         return edad;
